@@ -1,0 +1,26 @@
+PartitionKey: User
+SortKey: SITE#UniqueName
+Attributes: SecretKey, Metadata (server number, last access time, yadda yadda)
+
+PartitionKey: PK
+USER#Username
+SortKey: SK
+METADATA#Username: {Password: PSWHASH, AccountType: Free}
+SITE#AWS-SCOTT: {Created At: Server Number: SecretKey: LastAccessTime: }
+
+https://www.alexdebrie.com/posts/dynamodb-one-to-many/
+
+PartitionKey: Username
+Attributes: {Name, email, passwordhash}
+
+
+Actions: 
+#Authenticate -- Username, PSWPK -> TOKEN +UpdateUser
+#DownloadALL -- Username, TOKEN -> {{All Keys}}
+#VerifyToken -- Username, TOKEN -> isValid
+#UpdateKEY -- Username, TOKEN, KEY -> isSuccessful
+#AddKEY -- Username, TOKEN, KEY -> isSuccessful
+#RequestKEY -- Username, TOKEN, KEYSITE
+#DeleteKEY -- Username, TOKEN, KEYSITE, KEYID -> isSuccessful
+#DeleteACCOUNT -- Username, PSWPK -> isSuccessful
+#ChangePassword -- Username, PSWPK
